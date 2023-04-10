@@ -10,8 +10,20 @@ const Home = () => {
 
     const handleAddToCart = tshirt => {
         // console.log(tshirt);
-        const newCart = [...cart, tshirt];
-        setCart(newCart);
+        const exists = cart.find(ts => ts._id === tshirt._id);
+        if(exists){
+
+        }
+        else{
+            const newCart = [...cart, tshirt];
+            setCart(newCart);
+        }
+    }
+
+    const handleRemoveFromCart = id => {
+        // console.log(id)
+        const remaining = cart.filter(ts => ts._id !== id);
+        setCart(remaining);
     }
 
     return (
@@ -26,7 +38,10 @@ const Home = () => {
                 }
             </div>
             <div className="cart-container">
-                <Cart></Cart>
+                <Cart
+                    handleRemoveFromCart={handleRemoveFromCart}
+                    cart={cart}
+                ></Cart>
             </div>
         </div>
     );
